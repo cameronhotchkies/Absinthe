@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Absinthe.Plugins</name>
+    </assembly>
+    <members>
+        <member name="P:Sql65ErrorPlugin.UnionSelectErrorPreNvarchar">
+            <summary>
+            The first half of an error when converting an nvarchar to a numeric data type.
+            </summary>
+        </member>
+        <member name="P:Sql65ErrorPlugin.UnionSelectErrorPreVarchar">
+            <summary>
+            The first half of an error when converting a varchar to a numeric data type.
+            </summary>
+        </member>
+        <member name="P:Sql65ErrorPlugin.UnionSelectErrorPostInt">
+            <summary>
+            The second half of an error when converting a varchar to an integer.
+            </summary>
+        </member>
+        <member name="P:Sql65ErrorPlugin.UnionSelectErrorPostFloat">
+            <summary>
+            The second half of an error when converting a varchar to a float.
+            </summary>
+        </member>
+        <member name="P:Sql65ErrorPlugin.UnionSelectErrorStandaloneFloat">
+            <summary>
+            The full error string generated when attempting to convert a varchar to a float.
+            </summary>
+        </member>
+        <member name="P:Sql65ErrorPlugin.UnionSelectErrorStandaloneInt">
+            <summary>
+            The full error string generated when attempting to convert a varchar to an integer.
+            </summary>
+        </member>
+        <member name="P:Sql65ErrorPlugin.UnionSelectErrorStandaloneNumeric">
+            <summary>
+            The full error string generated when attempting to convert a varchar to an numeric.
+            </summary>
+        </member>
+        <member name="P:Sql65ErrorPlugin.UnionSelectErrorStandaloneDateTime">
+            <summary>
+            The full error string generated when attempting to convert a varchar to a datetime.
+            </summary>
+        </member>
+        <member name="P:Sql65ErrorPlugin.UnionSelectErrorStandaloneMoney">
+            <summary>
+            The full error string generated when attempting to convert a varchar to a money.
+            </summary>
+        </member>
+        <member name="P:Sql65ErrorPlugin.UnionSelectErrorPostSmallint">
+            <summary>
+            The second half of an error when converting a varchar to a smallint.
+            </summary>
+        </member>
+        <member name="M:SybaseBlindPlugin.NumberOfRecords(System.String)">
+            <summary>
+            SQL Code for the record count.
+            </summary>
+            <param name="TableName">The name of the table to get the record count from</param>
+            <returns>The number of records available in the table.</returns>
+        </member>
+        <member name="T:Absinthe.Plugins.Sql2kErrorPlugin_B">
+            <summary>Summary description for Sql2kErrorPlugin_B.</summary>
+        </member>
+        <member name="P:Absinthe.Plugins.Sql2kErrorPlugin_B.UnionSelectErrorPreNvarchar">
+            <summary>The first half of an error when converting an nvarchar to a numeric data type.</summary>
+        </member>
+        <member name="P:Absinthe.Plugins.Sql2kErrorPlugin_B.UnionSelectErrorPreVarchar">
+            <summary>The first half of an error when converting a varchar to a numeric data type.</summary>
+        </member>
+        <member name="P:Absinthe.Plugins.Sql2kErrorPlugin_B.UnionSelectErrorPostInt">
+            <summary>The second half of an error when converting a varchar to an integer.</summary>
+        </member>
+        <member name="P:Absinthe.Plugins.Sql2kErrorPlugin_B.UnionSelectErrorPostFloat">
+            <summary>The second half of an error when converting a varchar to a float.</summary>
+        </member>
+        <member name="P:Absinthe.Plugins.Sql2kErrorPlugin_B.UnionSelectErrorPostSmallint">
+            <summary>The second half of an error when converting a varchar to a smallint.</summary>
+        </member>
+        <member name="P:Absinthe.Plugins.Sql2kErrorPlugin_B.UnionSelectErrorStandaloneFloat">
+            <summary>The full error string generated when attempting to convert a varchar to a float.</summary>
+        </member>
+        <member name="P:Absinthe.Plugins.Sql2kErrorPlugin_B.UnionSelectErrorStandaloneInt">
+            <summary>The full error string generated when attempting to convert a varchar to an integer.</summary>
+        </member>
+        <member name="P:Absinthe.Plugins.Sql2kErrorPlugin_B.UnionSelectErrorStandaloneNumeric">
+            <summary>The full error string generated when attempting to convert a varchar to a numeric.</summary>
+        </member>
+        <member name="P:Absinthe.Plugins.Sql2kErrorPlugin_B.UnionSelectErrorStandaloneMoney">
+            <summary>The full error string generated when attempting to convert a varchar to a money.</summary>
+        </member>
+        <member name="P:Absinthe.Plugins.Sql2kErrorPlugin_B.UnionSelectErrorStandaloneDateTime">
+            <summary>The full error string generated when attempting to convert a varchar to a datetime.</summary>
+        </member>
+        <member name="M:MicrosoftSqlServerBlindPlugin.NumberOfRecords(System.String)">
+            <summary>
+            SQL Code for the record count.
+            </summary>
+            <param name="TableName">The name of the table to get the record count from</param>
+            <returns>The number of records available in the table.</returns>
+        </member>
+        <member name="P:Sql7ErrorPlugin.UnionSelectErrorPreNvarchar">
+            <summary>The first half of an error when converting an nvarchar to a numeric data type.</summary>
+        </member>
+        <member name="P:Sql7ErrorPlugin.UnionSelectErrorPreVarchar">
+            <summary>The first half of an error when converting a varchar to a numeric data type.</summary>
+        </member>
+        <member name="P:Sql7ErrorPlugin.UnionSelectErrorPostInt">
+            <summary>The second half of an error when converting a varchar to an integer.</summary>
+        </member>
+        <member name="P:Sql7ErrorPlugin.UnionSelectErrorPostFloat">
+            <summary>The second half of an error when converting a varchar to a float.</summary>
+        </member>
+        <member name="P:Sql7ErrorPlugin.UnionSelectErrorStandaloneFloat">
+            <summary>The full error string generated when attempting to convert a varchar to a float.</summary>
+        </member>
+        <member name="P:Sql7ErrorPlugin.UnionSelectErrorStandaloneInt">
+            <summary>
+            The full error string generated when attempting to convert a varchar to an integer.
+            </summary>
+        </member>
+        <member name="P:Sql7ErrorPlugin.UnionSelectErrorStandaloneDateTime">
+            <summary>The full error string generated when attempting to convert a varchar to a datetime.</summary>
+        </member>
+        <member name="P:Sql7ErrorPlugin.UnionSelectErrorPostSmallint">
+            <summary>The second half of an error when converting a varchar to a smallint.</summary>
+        </member>
+    </members>
+</doc>

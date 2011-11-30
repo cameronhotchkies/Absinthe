@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<project name="Absinthe" default="build" basedir=".">
+	<description>The 0x90.org SQL Injection Tool</description>
+
+	<target name="build" description="assemble the bin/ package" depends="Core,Plugins,GUI">
+		<copy file="core/Absinthe.Core.dll" todir="bin" />
+		<copy file="core/Absinthe.Core.dll.mdb" todir="bin" />
+		<copy file="plugins/Absinthe.Plugins.dll" todir="bin/plugins" />
+		<copy file="plugins/Absinthe.Plugins.dll.mdb" todir="bin/plugins" />
+		<copy file="wx/Absinthe.exe" todir="bin" />
+	</target>
+
+	<target name="Core" description="compiles the tool">
+		<nant buildfile="core/Absinthe.Core.build" />
+	</target>
+
+	<target name="Plugins" description="the absinthe plugins" depends="Core">
+		<nant buildfile="plugins/Absinthe.Plugins.build" />
+	</target>
+
+	<target name="GUI" description="the wx.NET GUI" depends="Core,Plugins">
+		<nant buildfile="wx/Absinthe.wx.build" />
+	</target>
+
+	<target name="clean" description="Remove the binaries">
+		<nant buildfile="core/Absinthe.Core.build" target="clean" />
+		<nant buildfile="plugins/Absinthe.Plugins.build" target="clean" />
+		<nant buildfile="wx/Absinthe.wx.build" target="clean" />
+		<delete file="bin/Absinthe.exe" failonerror="false" />
+		<delete file="bin/plugins/Absinthe.Plugins.dll" failonerror="false" />
+		<delete file="bin/Absinthe.Core.dll" failonerror="false" />
+	</target>
+
+</project>

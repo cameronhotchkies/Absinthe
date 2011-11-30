@@ -1,0 +1,1101 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Absinthe.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Absinthe.Core.DataStore">
+            <summary>The class that handles storage of internal state variables. This may be converted to a singleton later.</summary>
+        </member>
+        <member name="M:Absinthe.Core.DataStore.Authdata(Absinthe.Core.GlobalDS.AuthType)">
+            <summary>Sets the Auth data to empty</summary>
+            <param name="AuthType">The Auth type, although it doesn't matter what it's set to this overload will set it to "None"</param>
+        </member>
+        <member name="M:Absinthe.Core.DataStore.Authdata(Absinthe.Core.GlobalDS.AuthType,System.String,System.String)">
+            <summary>Sets the authentication data</summary>
+            <param name="AuthType">The authentication type</param>
+            <param name="Username">The authentication username</param>
+            <param name="Password">The authentication password</param>
+        </member>
+        <member name="M:Absinthe.Core.DataStore.Authdata(Absinthe.Core.GlobalDS.AuthType,System.Net.NetworkCredential)">
+            <summary>Sets the authentication data</summary>
+            <param name="AuthType">The authentication type</param>
+            <param name="Credentials">The authentication credentials</param>
+        </member>
+        <member name="M:Absinthe.Core.DataStore.AddFormParameter(Absinthe.Core.GlobalDS.FormParam)">
+            <summary>Adds a form parameter for use during the attack</summary>
+            <param name="value">The FormParam object containing the relevant parameter information</param>
+        </member>
+        <member name="M:Absinthe.Core.DataStore.#ctor">
+            <summary>Instantiates a new DataStore class</summary>
+        </member>
+        <member name="M:Absinthe.Core.DataStore.GetTableFromName(System.String)">
+            <summary>Used as a name based lookup for a table</summary>
+            <param name="TableName">The human readable name of the table</param>
+            <returns>The table structure associated with the given name</returns>
+        </member>
+        <member name="M:Absinthe.Core.DataStore.OutputToFile(System.String)">
+            <summary>Save all known data to a file</summary>
+        </member>
+        <member name="M:Absinthe.Core.DataStore.LoadXmlFile(System.String,System.Collections.Queue)">
+            <summary>Loads saved target information from an XML file</summary>
+            <param name="Filename">The name of the file to read information from</param>
+            <param name="AnonProxies">The proxies to be using when the data is initialized</param>
+        </member>
+        <member name="M:Absinthe.Core.DataStore.DeserializeAttackVector(System.Xml.XmlNode@,System.Collections.Queue)">
+            <summary>
+            Converts the Attack Vector from the native type to XML
+            </summary>
+            <param name="xInput">The XML node to start deserialization</param>
+            <param name="AnonProxies">Any anonymous proxies being used</param>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.PluginList">
+            <summary>The list of all available plugins</summary>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.LoadedPluginName">
+            <summary>The name of the plugin being used</summary>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.IsBlind">
+            <summary>Indicates if a blind injection is being used</summary>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.InjectAsString">
+            <summary>Indicates if the injection parameter should be treated as a string</summary>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.FilterTolerance">
+            <summary>The comparison tolerance used in blind filters</summary>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.TerminateQuery">
+            <summary>Indicates if a SQL statement is to be terminated with a comment</summary>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.FilterDelimiter">
+            <summary>Used as the delimiter to create the linear signature</summary>
+            <remarks>Defaults to Environment.NewLine</remarks>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.AppendedText">
+            <summary>
+            This is the text appended to the end of the query.
+            </summary>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.ThrottleValue">
+            <summary>The throttle value used to sleep (in msec) between requests</summary>
+            <remarks>If the value is negative, it is rounded to the nearest hundred 
+            which is used for multithreading (eg. -289 -> -300 -> 3 Threads)</remarks>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.OutputFile">
+            <summary>The filename in which to store the attack configuration</summary>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.TargetURL">
+            <summary>The URL of the attack target</summary>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.ConnectionMethod">
+            <summary>The connection method to be used. May be "GET" or "POST"</summary>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.Username">
+            <summary>The username the database connection operates as</summary>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.AuthenticationMethod">
+            <summary>The authentication method to be used</summary>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.AuthUser">
+            <summary>The authentication username to be used</summary>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.AuthPassword">
+            <summary>The authentication password to be used</summary>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.AuthDomain">
+            <summary>The authentication domain used by NTLM</summary>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.UserAgent">
+            <summary>The user agent to send during connections</summary>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.Cookies">
+            <summary>The list of all the key/value pairs to be treated as cookies</summary>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.ParameterTable">
+            <summary>A hashtable of the form parameters, keyed by the parameter name</summary>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.TargetAttackVector">
+            <summary>The AttackVector used against the target</summary>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.TableList">
+            <summary>A list of all the tables recovered from the database</summary>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.AllTablesRetrieved">
+            <summary>Indicates if table retrieval is finished</summary>
+            <remarks>This is used primarily for restoring a session that failed.</remarks>
+        </member>
+        <member name="E:Absinthe.Core.DataStore.UserStatus">
+            <summary>The Event to send a status message to the user</summary>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.PartialTable">
+            <summary>
+            The unfinished table as it is being downloaded
+            </summary>
+        </member>
+        <member name="T:Absinthe.Core.DataStore.InvalidDataFileException">
+            <summary>An exception generated when the data file is malformed</summary>
+        </member>
+        <member name="M:Absinthe.Core.DataStore.InvalidDataFileException.#ctor(System.String)">
+            <summary>Instantiates a new InvalidDataFileException</summary>
+            <param name="Filename">The name of the file causing the exception</param>
+        </member>
+        <member name="P:Absinthe.Core.DataStore.InvalidDataFileException.Message">
+            <summary>The display message used for this exception</summary>
+            <returns>Indicates the filename that is not valid for Absinthe</returns>
+        </member>
+        <member name="T:Absinthe.Core.AttackVectorFactory">
+            <summary>Used as a factory class to generate an attack vector object</summary>
+        </member>
+        <member name="M:Absinthe.Core.AttackVectorFactory.#ctor(System.String,System.String,System.String,System.Collections.Specialized.NameValueCollection,System.String,Absinthe.Core.InjectionOptions)">
+            <summary>Public Constructor for instantiation</summary>
+            <param name="URL">The URL of the attack target</param>
+            <param name="VectorName">The name of the injectable parameter</param>
+            <param name="VectorBuffer">The default value of the injectable parameter</param>
+            <param name="AdditionalParams">Any additional parameters to be sent but not used as part of the injection</param>
+            <param name="Method">The form action method to use during the injection</param>
+            <param name="Options">The InjectionOptions to be used during the attack</param>
+        </member>
+        <member name="M:Absinthe.Core.AttackVectorFactory.#ctor(System.String,System.String,System.String,System.Collections.Hashtable,System.String,Absinthe.Core.InjectionOptions)">
+            <summary>Public Constructor for instantiation</summary>
+            <param name="URL">The URL of the attack target</param>
+            <param name="VectorName">The name of the injectable parameter</param>
+            <param name="VectorBuffer">The default value of the injectable parameter</param>
+            <param name="FormParams">Any additional parameters to be sent but not used as part of the injection</param>
+            <param name="Method">The form action method to use during the injection</param>
+            <param name="Options">The InjectionOptions to be used during the attack</param>
+        </member>
+        <member name="M:Absinthe.Core.AttackVectorFactory.BuildSqlErrorAttackVector(Absinthe.Core.IErrorPlugin)">
+            <summary>Generate a new SQL Error based attack vector.</summary>
+            <param name="PluginUsed">The Error based plugin to use in the new AttackVector</param>
+            <returns>A SQL Error attack vector that will use the given plugin.</returns>
+        </member>
+        <member name="M:Absinthe.Core.AttackVectorFactory.BuildBlindSqlAttackVector(System.Single,Absinthe.Core.IBlindPlugin)">
+            <summary>Creates a BlindSqlAttackVector object</summary>
+            <param name="Tolerance">The percentage tolerance band to use for comparing signatures</param>
+            <param name="PluginUsed">The plugin being used for this injection</param>
+            <returns>An initialized BlindSqlAttackVector</returns>
+        </member>
+        <member name="M:Absinthe.Core.AttackVectorFactory.BuildFromXml(System.Xml.XmlNode,Absinthe.Core.InjectionOptions,Absinthe.Core.IPlugin)">
+            <summary>Rebuilds an AttackVector from it's saved XML format</summary>
+            <param name="VectorNode">The root node of the Attack Vector information</param>
+            <param name="opts">The options for this injection</param>
+             <param name="PluginUsed">The current plugin being used for this injection</param>
+            <returns>An initialized AttackVector</returns>
+        </member>
+        <member name="E:Absinthe.Core.AttackVectorFactory.UserStatus">
+            <summary>Event used to bubble up status messages to the user</summary>
+        </member>
+        <member name="P:Absinthe.Core.AttackVectorFactory.Options">
+            <summary>The options for the injection</summary>
+        </member>
+        <member name="P:Absinthe.Core.AttackVectorFactory.AttackParams">
+            <summary>The parameters for the injection</summary>
+        </member>
+        <member name="P:Absinthe.Core.AttackVectorFactory.VectorBuffer">
+            <summary>The text used at the specific injection parameter</summary>
+        </member>
+        <member name="P:Absinthe.Core.AttackVectorFactory.VectorName">
+            <summary>The name of the parameter that is injectable</summary>
+        </member>
+        <member name="P:Absinthe.Core.AttackVectorFactory.TargetUrl">
+            <summary>The url of the injectable target</summary>
+        </member>
+        <member name="P:Absinthe.Core.AttackVectorFactory.isPost">
+            <summary>Indicates if the connection method is a POST</summary>
+        </member>
+        <member name="T:Absinthe.Core.TableChangedEventHandler">
+            <summary>Definition of the TableChanged event handler delegate</summary>
+        </member>
+        <member name="T:Absinthe.Core.AttackVector">
+            <summary>The general interface denoting the style of injection taking place</summary>
+        </member>
+        <member name="M:Absinthe.Core.AttackVector.ToXml(System.Xml.XmlTextWriter@)">
+            <summary>Create an xml representation of the AttackVector instance.</summary>
+            <param name="xOutput">An XmlTextWriter instance that is already created for exporting
+            the AttackVector information to.</param>
+        </member>
+        <member name="M:Absinthe.Core.AttackVector.GetDatabaseUsername">
+            <summary>Retrieve the the username the database connection is running as.</summary>
+            <returns>The current database username.</returns>
+        </member>
+        <member name="M:Absinthe.Core.AttackVector.GetTableList">
+            <summary>Retrieve the tables from the database.</summary>
+            <returns>An array of Tables including the name, id and record count.</returns>
+        </member>
+        <member name="M:Absinthe.Core.AttackVector.RecoverTableList(Absinthe.Core.GlobalDS.Table[])">
+            <summary>Takes a partially built schema and continues to download what is left</summary>
+            <param name="RecoveredList">The preexisting schema</param>
+            <returns>The fully downloaded schema</returns>
+        </member>
+        <member name="M:Absinthe.Core.AttackVector.PopulateTableStructure(Absinthe.Core.GlobalDS.Table@)">
+            <summary>Retrieve the columns of a given table and load it into the given Table information.</summary>
+            <param name="TableData">The table to retrieve the field information for.</param>
+        </member>
+        <member name="M:Absinthe.Core.AttackVector.PullDataFromTable(Absinthe.Core.GlobalDS.Table[],System.Int64[][],System.String)">
+            <summary>Download records from the database.</summary>
+            <param name="SrcTable">An array of tables from which to retrieve data.</param>
+            <param name="ColumnIDLists">All the fields for the corresponding tables for which data is desired.</param>
+            <param name="xmlFilename">The filename to save the retrieved data to.</param>
+        </member>
+        <member name="P:Absinthe.Core.AttackVector.ExploitType">
+            <summary>The type of exploit that the attack vector represents.</summary>
+        </member>
+        <member name="P:Absinthe.Core.AttackVector.Proxies">
+            <summary>Any proxies specific to the attack vector</summary>
+        </member>
+        <member name="E:Absinthe.Core.AttackVector.TableChanged">
+            <summary>Event triggered when a table's data has been changed</summary>
+        </member>
+        <member name="E:Absinthe.Core.AttackVector.UserStatus">
+            <summary>
+            The event used to bubble status messages to the user
+            </summary>
+        </member>
+        <member name="T:Absinthe.Core.ErrorInjectionOptions">
+            <summary>Options specific to error based injections</summary>
+        </member>
+        <member name="T:Absinthe.Core.InjectionOptions">
+            <summary>
+            The base class of options available to injections
+            </summary>
+        </member>
+        <member name="M:Absinthe.Core.InjectionOptions.#ctor">
+            <summary>
+            Instantiates a new Injection Option class
+            </summary>
+        </member>
+        <member name="P:Absinthe.Core.InjectionOptions.UserAgent">
+            <summary>The user agent to display at all connections</summary>
+        </member>
+        <member name="P:Absinthe.Core.InjectionOptions.AppendedQuery">
+            <summary>The text to be appended to the end of the query</summary>
+        </member>
+        <member name="P:Absinthe.Core.InjectionOptions.InjectAsString">
+            <summary>Identifies if the injected parameter should be treated as a string</summary>
+        </member>
+        <member name="P:Absinthe.Core.InjectionOptions.TerminateQuery">
+            <summary>Indicates if the SQL should be terminated by comments</summary>
+        </member>
+        <member name="P:Absinthe.Core.InjectionOptions.WebProxies">
+            <summary>
+            The list of all the Web proxies to be used during the injection
+            </summary>
+        </member>
+        <member name="P:Absinthe.Core.InjectionOptions.Cookies">
+            <summary>
+            All of the Cookies to be used during the injection
+            </summary>
+        </member>
+        <member name="P:Absinthe.Core.InjectionOptions.AuthCredentials">
+            <summary>
+            The authentication information for this connection
+            </summary>
+        </member>
+        <member name="M:Absinthe.Core.ErrorInjectionOptions.#ctor">
+            <summary>Instantiates a new InjectionOption class</summary>
+        </member>
+        <member name="P:Absinthe.Core.ErrorInjectionOptions.VerifyVersion">
+            <summary>Indicates whether the plugin should be used to identify if it is the correct one</summary>
+        </member>
+        <member name="T:Absinthe.Core.ParsePage">
+            <summary>This class handles anything related to page comparisons</summary>
+        </member>
+        <member name="M:Absinthe.Core.ParsePage.ParseUnionSumError(System.String,Absinthe.Core.IErrorPlugin)">
+            <summary>Parses a result page for a UNION SUM error to determine the data type</summary>
+            <param name="HTMLCode">The HTML text from the resulting error page</param>
+            <param name="Plugin">The Plugin to use to identify the data type</param>
+            <returns>The data type of the field generating the error</returns>
+        </member>
+        <member name="M:Absinthe.Core.ParsePage.ParseUnionSelectForIntegerRefinement(System.String,Absinthe.Core.IErrorPlugin)">
+            <summary>
+            Parses a result page for a UNION SELECT error to refine the data type
+            </summary>
+            <param name="HTMLCode">The HTML text from the resulting error page</param>
+            <param name="Plugin">The Plugin to use to identify the data type</param>
+            <returns>The refined data type of the field that caused the error</returns>
+        </member>
+        <member name="M:Absinthe.Core.ParsePage.ParseUnionSelectForVarchar(System.String,Absinthe.Core.IErrorPlugin)">
+            <summary>
+            Parses out Varchar text from a UNION SELECT error
+            </summary>
+            <param name="HTMLCode">The HTML text from the resulting error page</param>
+            <param name="Plugin">The Plugin to use to identify the data type</param>
+            <returns>The string encapsulated in the error message</returns>
+        </member>
+        <member name="M:Absinthe.Core.ParsePage.ParseUnionSelectForNvarchar(System.String,Absinthe.Core.IErrorPlugin)">
+            <summary>
+             Parses out NVarchar text from a UNION SELECT error
+            </summary>
+            <param name="HTMLCode">The HTML text from the resulting error page</param>
+            <param name="Plugin">The Plugin to use to identify the data type</param>
+            <returns>The string encapsulated in the error message</returns>
+        </member>
+        <member name="M:Absinthe.Core.ParsePage.ParseGroupedHaving(System.String,Absinthe.Core.IErrorPlugin)">
+            <summary>
+            Parse the error generated by a HAVING error that has a GROUP BY clause
+            </summary>
+            <param name="HTMLCode">The HTML text from the resulting error page</param>
+            <param name="Plugin">The Plugin to use to identify the data type</param>
+            <returns>The name of the field that caused the error</returns>
+        </member>
+        <member name="M:Absinthe.Core.ParsePage.CompareSignatures(System.Double[],System.Double[],System.Single)">
+            <summary>Compares a known value signature set to an unknown value signature set</summary>
+            <returns>A value indicating if the two signatures match</returns>
+            <param name="KnownCase">The signature of the known value</param>
+            <param name="UnknownCase">The signature of the unknown value</param>
+            <param name="Tolerance">The tolerance band to use during comparison</param>
+        </member>
+        <member name="M:Absinthe.Core.ParsePage.CompareSignatures(System.Double[],System.Double[],System.Int32[],System.Single)">
+            <summary>Compares the signature to a recieved page utilizing the filters</summary>
+            <param name="KnownCase">The signature with a known meaning</param>
+            <param name="UnknownCase">The signature with an unknown meaning</param>
+            <param name="Filter">The filter to apply against the comparison</param>
+            <param name="Tolerance">The tolerance for error on the signatures</param>
+            <returns>An indication if they match</returns>
+        </member>
+        <member name="M:Absinthe.Core.ParsePage.GetHtmlPageSignature(System.String,System.String)">
+            <summary>Generate the Page Signature for use in blind SQL Injections</summary>
+            <param name="HtmlPage">The source HTML to generate a signature from</param>
+            <param name="Delimiter">The delimiter to use when generating signatures</param>
+            <returns>The ASCII-Sum signature for the given page</returns>
+        </member>
+        <member name="M:Absinthe.Core.ParsePage.GenerateAdaptiveFilter(System.Double[][],System.Single)">
+            <summary>Generate the adaptive filter from a set of signatures that embody the same boolean value</summary>
+            <param name="Signatures">An array of signatures that represent the same result value</param>
+            <param name="Tolerance">The tolerance to be used to generate the filter</param>
+            <returns>An array of indices that do not change indepedently of the desired page results</returns>		
+        </member>
+        <member name="M:Absinthe.Core.ParsePage.GenerateSubtractiveFilter(System.Double[],System.Double[],System.Single)">
+            <summary>Generate the subtractive filter from a set of opposing signatures</summary>
+            <param name="Signature1">The first signature to generate the filter against</param>
+            <param name="Signature2">The second signature to generate the filter against. This should represent a 
+            different value than the first signature</param>
+            <param name="Tolerance">The tolerance to be used to generate the filter</param>
+            <returns>An array of indices that contain values unique to each signature</returns>
+        </member>
+        <member name="E:Absinthe.Core.ParsePage.UserStatus">
+            <summary>The event to send a status message to a parent class</summary>
+        </member>
+        <member name="T:Absinthe.Core.CommonUserAgents">
+            <summary>A collection of commonly used user agents.</summary>
+        </member>
+        <member name="F:Absinthe.Core.CommonUserAgents.Absinthe">
+            <summary>The default user agent for 0x90.org's Absinthe</summary>
+        </member>
+        <member name="F:Absinthe.Core.CommonUserAgents.Firefox">
+            <summary>The user agent for Mozilla Firefox</summary>
+        </member>
+        <member name="F:Absinthe.Core.CommonUserAgents.Galeon">
+            <summary>The user agent for Galeon</summary>
+        </member>
+        <member name="F:Absinthe.Core.CommonUserAgents.GoogleBot">
+            <summary>The user agent for GoogleBot</summary>
+        </member>
+        <member name="F:Absinthe.Core.CommonUserAgents.InternetExplorer">
+            <summary>The user agent for MS Internet Explorer</summary>
+        </member>
+        <member name="F:Absinthe.Core.CommonUserAgents.Konqueror">
+            <summary>The user agent for Konqueror</summary>
+        </member>
+        <member name="F:Absinthe.Core.CommonUserAgents.Links">
+            <summary>The user agent for Links</summary>
+        </member>
+        <member name="F:Absinthe.Core.CommonUserAgents.Mozilla">
+            <summary>The user agent for Mozilla</summary>
+        </member>
+        <member name="F:Absinthe.Core.CommonUserAgents.Netscape">
+            <summary>The user agent for Netscape</summary>
+        </member>
+        <member name="F:Absinthe.Core.CommonUserAgents.Opera">
+            <summary>The user agent for Opera</summary>
+        </member>
+        <member name="F:Absinthe.Core.CommonUserAgents.Safari">
+            <summary>The user agent for Safari</summary>
+        </member>
+        <member name="T:Absinthe.Core.httpConnect">
+            <summary>
+            All HTTP connections are done through this class.
+            </summary>
+        </member>
+        <member name="M:Absinthe.Core.httpConnect.PageRequest(System.String,System.Collections.Specialized.NameValueCollection,System.Net.WebProxy,System.Boolean,System.Collections.Specialized.NameValueCollection,System.Net.NetworkCredential,System.String)">
+            <summary>
+            Request the HTML page
+            </summary>
+            <returns>The whole HTML page as a single string</returns>
+            <param name="ConnectURL">The URL to request the page from</param>
+            <param name="Data">The Key/Value pairs to send along with the request</param>
+            <param name="Proxy">The web proxy to use. This is null if it is a direct connection</param>
+            <param name="UsePost">Indicates if the request is a POST request. Otherwise it is a GET.</param>
+            <param name="Cookies">The Key/Value pairs to send as cookies.</param>
+            <param name="AuthCredentials">The authentication data for this request</param>
+            <param name="UserAgent">The user agent to be displayed for this request</param>
+        </member>
+        <member name="E:Absinthe.Core.httpConnect.UserStatus">
+            <summary>
+            The event for bubbling up status messages
+            </summary>
+        </member>
+        <member name="T:Absinthe.Core.UserEvents.UserStatusEventHandler">
+            <summary>Used as a delegate to bubble status messages up to the user</summary>
+            <param name="TextMsg">The text message to be passed up</param>
+        </member>
+        <member name="T:Absinthe.Core.UserEvents.UserMessageEventHandler">
+            <summary>
+            Used as a delegate to bubble normal messages up to the user
+            </summary>
+            <param name="TextMsg">The text message to be passed up</param>
+        </member>
+        <member name="T:Absinthe.Core.IPlugin">
+            <summary>
+            The base interface for all sql injection plugins
+            </summary>
+        </member>
+        <member name="P:Absinthe.Core.IPlugin.PluginDisplayTargetName">
+            <summary>
+            The name of the plugin to be displayed in the application
+            </summary>
+        </member>
+        <member name="P:Absinthe.Core.IPlugin.AuthorName">
+            <summary>
+            The name of the author of the plugin
+            </summary>
+        </member>
+        <member name="T:Absinthe.Core.IErrorPlugin">
+            <summary>
+            The interface for all Error Based SQL injections
+            </summary>
+        </member>
+        <member name="P:Absinthe.Core.IErrorPlugin.HavingErrorPre">
+            <summary>The initial part of the error string generated on a HAVING error</summary>
+        </member>
+        <member name="P:Absinthe.Core.IErrorPlugin.HavingErrorPost">
+            <summary>The final part of the error string generated on a HAVING error</summary>
+        </member>
+        <member name="P:Absinthe.Core.IErrorPlugin.HavingErrorPostWithGroupBy">
+            <summary>The final part of the error string generated on a HAVING error with a GROUP BY</summary>
+        </member>
+        <member name="P:Absinthe.Core.IErrorPlugin.UnionSumErrorPre">
+            <summary>The initial part of the error string generated on a UNION SUM error</summary>
+        </member>
+        <member name="P:Absinthe.Core.IErrorPlugin.UnionSumErrorOnIntPre">
+            <summary>The initial part of the error string generated on a UNION SUM error when an integer is found</summary>
+        </member>
+        <member name="P:Absinthe.Core.IErrorPlugin.UnionSumErrorOnText">
+            <summary>The initial part of the error string generated on a UNION SUM error when text is found</summary>
+        </member>
+        <member name="P:Absinthe.Core.IErrorPlugin.UnionSumErrorPost">
+            <summary>The final part of the error string generated on a UNION SUM error</summary>
+        </member>
+        <member name="P:Absinthe.Core.IErrorPlugin.UnionSelectErrorPreNvarchar">
+            <summary>The initial part of the error string generated on a UNION SELECT error with an NVarChar</summary>
+        </member>
+        <member name="P:Absinthe.Core.IErrorPlugin.UnionSelectErrorPreVarchar">
+            <summary>The initial part of the error string generated on a UNION SELECT error with a VarChar</summary>
+        </member>
+        <member name="P:Absinthe.Core.IErrorPlugin.UnionSelectErrorPostInt">
+            <summary>The final part of the error string generated on a UNION SELECT error with an Integer</summary>
+        </member>
+        <member name="P:Absinthe.Core.IErrorPlugin.UnionSelectErrorPostFloat">
+            <summary>The final part of the error string generated on a UNION SELECT error with an Float</summary>
+        </member>
+        <member name="P:Absinthe.Core.IErrorPlugin.UnionSelectErrorPostSmallint">
+            <summary>The final part of the error string generated on a UNION SELECT error with an Smallint</summary>
+        </member>
+        <member name="P:Absinthe.Core.IErrorPlugin.UnionSelectErrorStandaloneInt">
+            <summary>The full error string generated on a UNION SELECT error with an Integer</summary>
+        </member>
+        <member name="P:Absinthe.Core.IErrorPlugin.UnionSelectErrorStandaloneFloat">
+            <summary>The full error string generated on a UNION SELECT error with a Float</summary>
+        </member>
+        <member name="P:Absinthe.Core.IErrorPlugin.UnionSelectErrorStandaloneNumeric">
+            <summary>The full error string generated on a UNION SELECT error with a Numeric</summary>
+        </member>
+        <member name="P:Absinthe.Core.IErrorPlugin.UnionSelectErrorStandaloneDateTime">
+            <summary>The full error string generated on a UNION SELECT error with a DateTime</summary>
+        </member>
+        <member name="P:Absinthe.Core.IErrorPlugin.UnionSelectErrorStandaloneMoney">
+            <summary>The full error string generated on a UNION SELECT error with a Money</summary>
+        </member>
+        <member name="P:Absinthe.Core.IErrorPlugin.KnownSupportedVersions">
+            <summary>
+            The list of version strings this plugin has been tested against
+            </summary>
+        </member>
+        <member name="T:Absinthe.Core.IBlindPlugin">
+            <summary>
+            The interface for all Blind SQL injection plugins
+            </summary>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.AndEqualWrapper(System.String)">
+            <summary>Modifies text by wrapping it in an "AND xxx ="</summary>
+            <param name="Value">The text to be wrapped</param>
+            <returns>The given text wrapped by valid SQL</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.AndGreaterThanWrapper(System.String)">
+            <summary>Modifies text by wrapping it in an "AND xxx >"</summary>
+            <param name="Value">The text to be wrapped</param>
+            <returns>The given text wrapped by valid SQL</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.AndGreaterThanEqualWrapper(System.String)">
+            <summary>Modifies text by wrapping it in an "AND xxx >="</summary>
+            <param name="Value">The text to be wrapped</param>
+            <returns>The given text wrapped by valid SQL</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.AndIsNullWrapper(System.String)">
+            <summary>Modifies text by wrapping it in an "AND xxx IS NULL"</summary>
+            <param name="Value">The text to be wrapped</param>
+            <returns>The given text wrapped by valid SQL</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.NextLowestTableID(System.Int64)">
+            <summary>The SQL required to get the next table ID higher than the given table id</summary>
+            <param name="PrevTableID">The last table id, set to 0 for the first table</param>
+            <returns>The required SQL code</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.NextLowestFieldID(System.Int64,System.Int64)">
+            <summary>The SQL required to get the next field ID higher than the given field id</summary>
+            <param name="TableID">The table id this field is in</param>
+            <param name="PrevFieldID">The field if of the previous field. Set to 0 for the first field.</param>
+            <returns>The required SQL code</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.TableNameLength(System.Int64)">
+            <summary>The SQL required to get the length of a given table's name</summary>
+            <param name="TableID">The table id this name is for</param>
+            <returns>The required SQL code</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.TableNameCharacterValue(System.Int64,System.Int64)">
+            <summary>The SQL required to get the value of an index to given table's name</summary>
+            <param name="Index">The index of the character being retrieved</param>
+            <param name="TableID">The table id this name is for</param>
+            <returns>The required SQL code</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.NumberOfRecords(System.String)">
+            <summary>The SQL required to get the number of records in a table</summary>
+            <param name="TableName">The name of the table this is for</param>
+            <returns>The desired SQL code</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.PrimaryKeyColumn(System.Int64)">
+            <summary>The SQL required to get the column number of the primary key in a table</summary>
+            <param name="TableID">The ID of the table this is for</param>
+            <returns>The desired SQL code</returns>		
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.FieldDataType(System.Int64,System.Int64)">
+            <summary>The SQL required to get the data type of a field</summary>
+            <param name="FieldID">The ID of the field in question</param>
+            <param name="TableID">The ID of the table in question</param>
+            <returns>The desired SQL code</returns>		
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.FieldNameLength(System.Int64,System.Int64)">
+            <summary>The SQL required to get the length of the name of a field</summary>
+            <param name="FieldID">The ID of the field in question</param>
+            <param name="TableID">The ID of the table in question</param>
+            <returns>The desired SQL code</returns>		
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.FieldNameCharacterValue(System.Int64,System.Int64,System.Int64)">
+            <summary>The SQL required to get a single character of a name of a field</summary>
+            <param name="Index">The position of the character in the name</param>
+            <param name="FieldID">The ID of the field in question</param>
+            <param name="TableID">The ID of the table in question</param>
+            <returns>The desired SQL code</returns>		
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.NumberOfTables">
+            <summary>Select the number of tables in the database</summary>
+            <returns>The desired SQL code</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.NumberOfFieldsInTable(System.Int64)">
+            <summary>Select the number of fields in a given table in the database</summary>
+            <param name="TableID">The Table ID to retrieve information on</param>
+            <returns>The desired SQL code</returns>		
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.LengthOfConvertedPrimaryKeyValue(System.String,System.String)">
+            <summary>Select the length of a primary key value converted to text</summary>
+            <param name="KeyName">The field name of the key</param>
+            <param name="TableName">The name of the table</param>
+            <returns>The desired SQL code</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.LengthOfConvertedPrimaryKeyValue(System.String,System.String,System.String)">
+            <summary>Select the length of a primary key value converted to text</summary>
+            <param name="KeyName">The field name of the key</param>
+            <param name="TableName">The name of the table</param>
+            <param name="PrevKeyValue">The value of the last primary key checked</param>
+            <returns>The desired SQL code</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.ConvertedPrimaryKeyValueCharacter(System.Int64,System.String,System.String)">
+            <summary>Select a single character of a primary key value converted to text</summary>
+            <param name="Index">The position of the character</param>
+            <param name="KeyName">The field name of the key</param>
+            <param name="TableName">The name of the table</param>		
+            <returns>The desired SQL code</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.ConvertedPrimaryKeyValueCharacter(System.Int64,System.String,System.String,System.String)">
+            <summary>Select a single character of a primary key value converted to text</summary>
+            <param name="Index">The position of the character</param>
+            <param name="KeyName">The field name of the key</param>
+            <param name="TableName">The name of the table</param>		
+            <param name="PrevKeyValue">The value of the last primary key checked</param>
+            <returns>The desired SQL code</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.IntegerPrimaryKeyValue(System.String,System.String)">
+            <summary>Select the value of a numeric primary key</summary>
+            <param name="KeyName">The field name of the key</param>
+            <param name="TableName">The name of the table</param>
+            <returns>The desired SQL code</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.IntegerPrimaryKeyValue(System.String,System.String,System.String)">
+            <summary>Select the value of a numeric primary key</summary>
+            <param name="KeyName">The field name of the key</param>
+            <param name="TableName">The name of the table</param>
+            <param name="PrevKeyValue">The value of the last primary key checked</param>
+            <returns>The desired SQL code</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.SelectValueForGivenPrimaryKey(System.String,System.String,Absinthe.Core.GlobalDS.PrimaryKey)">
+            <summary>The SQL to select a value of a field for a given Primary Key</summary>
+            <param name="FieldName">The name of the field to select for</param>
+            <param name="TableName">The table to select from</param>
+            <param name="pk">The primary key of the target</param>
+            <returns>The required SQL code</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.SelectLengthOfValueForGivenPrimaryKey(System.String,System.String,Absinthe.Core.GlobalDS.PrimaryKey)">
+            <summary>Select the length of a value for a given primary key</summary>
+            <param name="FieldName">The name of the field</param>
+            <param name="TableName">The name of the table</param>
+            <param name="pk">The primary key value associated with this record</param>
+            <returns>The desired SQL code</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.SelectCharacterValueForGivenPrimaryKey(System.Int64,System.String,System.String,Absinthe.Core.GlobalDS.PrimaryKey)">
+            <summary>Select the value of a character of a field value for a given primary key</summary>
+            <param name="Index">The position of the character in the value</param>
+            <param name="FieldName">The name of the field</param>
+            <param name="TableName">The name of the table</param>
+            <param name="pk">The primary key value associated with this record</param>
+            <returns>The desired SQL code</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.SelectLengthOfConvertedRecordValue(System.String,System.String,Absinthe.Core.GlobalDS.PrimaryKey)">
+            <summary>Select the length of a value converted to text for a given primary key</summary>
+            <param name="FieldName">The name of the field</param>
+            <param name="TableName">The name of the table</param>
+            <param name="pk">The primary key value associated with this record</param>
+            <returns>The desired SQL code</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.SelectCharacterValueForConvertedRecordValue(System.Int64,System.String,System.String,Absinthe.Core.GlobalDS.PrimaryKey)">
+            <summary>Select the value of a character of a field value converted to text for a given primary key</summary>
+            <param name="Index">The position of the character in the value</param>
+            <param name="FieldName">The name of the field</param>
+            <param name="TableName">The name of the table</param>
+            <param name="pk">The primary key value associated with this record</param>
+            <returns>The desired SQL code</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.CharConversionFunction(System.Int64)">
+            <summary>
+            The database function to convert a decimal to a character
+            </summary>
+            <param name="DecimalValue">The ascii value of the character</param>
+            <returns>The desired SQL code</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.ConvertNativeDataType(System.Int64)">
+            <summary>
+            Converts the native data type to the .NET recognizable SQL data types
+            </summary>
+            <param name="DataType">The database native data type</param>
+            <returns>The .NET recognizable version of the data type</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.SelectDatabaseUsernameLength">
+            <summary>
+            Select the length  of the username of the database connection.
+            </summary>
+            <returns>The desired SQL code</returns>
+        </member>
+        <member name="M:Absinthe.Core.IBlindPlugin.SelectCharacterFromDatabaseUsername(System.Int64)">
+            <summary>
+            Selects a character of the database username
+            </summary>
+            <param name="Index">The position of the character in the username to select</param>
+            <returns>The desired SQL code</returns>
+        </member>
+        <member name="P:Absinthe.Core.IBlindPlugin.ConcatenationCharacter">
+            <summary>The concatenation character for this database</summary>
+        </member>
+        <member name="T:Absinthe.Core.UnsupportedPluginException">
+            <summary>
+            An exception thrown when an unsupported plugin is loaded
+            </summary>
+        </member>
+        <member name="M:Absinthe.Core.UnsupportedPluginException.#ctor(System.String)">
+            <summary>
+            Instantiates a new UnsupportedPluginException
+            </summary>
+            <param name="Message">The message to display to the user</param>
+        </member>
+        <member name="P:Absinthe.Core.UnsupportedPluginException.Message">
+            <summary>
+            The message for the user about this exception
+            </summary>
+        </member>
+        <member name="T:Absinthe.Core.BlindInjectionOptions">
+            <summary>
+            This class represents all of the options required by a Blind SQL injection.
+            </summary>
+        </member>
+        <member name="M:Absinthe.Core.BlindInjectionOptions.#ctor">
+            <summary>
+            Just a simple constructor.
+            </summary>
+        </member>
+        <member name="P:Absinthe.Core.BlindInjectionOptions.Delimiter">
+            <summary>
+            The delimiter to use when generating signatures. By default, this is the carriage return 
+            character (0x0a).
+            </summary>
+        </member>
+        <member name="P:Absinthe.Core.BlindInjectionOptions.Throttle">
+            <summary>
+            The amount to either speed up or slow down the injection. A negative number will speed
+            up the injection by threading requests. A positive number will add a delay of that many 
+            seconds between requests.
+            </summary>
+        </member>
+        <member name="P:Absinthe.Core.BlindInjectionOptions.Tolerance">
+            <summary>
+            The tolerance to use when comparing signatures. This is a decimal value, not a percentage.
+            Anything higher than 1 will be treated as 100%. The default value is 0.01.
+            </summary>
+        </member>
+        <member name="T:Absinthe.Core.SqlErrorAttackVector">
+            <summary>
+             The SqlErrorAttackVector class is the object used to perform attacks utilizing Error Based SQL Injection
+            </summary>
+        </member>
+        <member name="M:Absinthe.Core.SqlErrorAttackVector.#ctor(System.String,System.String,System.String,System.Collections.Specialized.NameValueCollection,System.String,Absinthe.Core.IErrorPlugin,Absinthe.Core.ErrorInjectionOptions)">
+            <summary>Generates a new SqlErrorAttackVector</summary>
+            <param name="URL">The target URL for the injection.</param>
+            <param name="VectorName">The name of the parameter to be injected against.</param>
+            <param name="VectorBuffer">The default value of the parameter to be injected against.</param>
+            <param name="AdditionalParams">Any additional parameters for the request unreleated to the actual injection.</param>
+            <param name="Method">The HTTP connection method. This may be "GET" or "POST".</param>
+            <param name="PluginUsed">The plugin to use in this injection.</param>
+            <param name="Options">Any options for this injection.</param>
+        </member>
+        <member name="M:Absinthe.Core.SqlErrorAttackVector.#ctor(System.String,System.String,System.Collections.Generic.List{Absinthe.Core.GlobalDS.Field},System.String,System.String,System.Collections.Specialized.NameValueCollection,Absinthe.Core.IErrorPlugin)">
+            <summary>Generates a new SqlErrorAttackVector. This constructor is generally called when loading from a saved file.</summary>
+            <param name="URL">The target URL for the injection.</param>
+            <param name="Method">The HTTP connection method. This may be "GET" or "POST".</param>
+            <param name="ElementList">The elements of the query being injected against.</param>
+            <param name="VectorName">The name of the parameter to be injected against.</param>
+            <param name="VectorBuffer">The default value of the parameter to be injected against.</param>
+            <param name="AttackParams">Any additional parameters for the request unreleated to the actual injection.</param>
+            <param name="PluginUsed">The plugin being used for this injection.</param>
+        </member>
+        <member name="M:Absinthe.Core.SqlErrorAttackVector.Initialize">
+            <summary>
+            Initializes the Attack Vector
+            </summary>
+        </member>
+        <member name="M:Absinthe.Core.SqlErrorAttackVector.AutoDetectPlugins(Absinthe.Core.IErrorPlugin[],Absinthe.Core.AttackVectorFactory,System.Net.WebProxy)">
+            <summary>
+            Automatically uses the available plugins to find a possible match.
+            </summary>
+            <param name="PossiblePlugins">The collection of possible error plugins</param>
+            <param name="avf">The attack vector factory that will be used to generate the tests</param>
+            <param name="Wp">The web proxy to use for the tests</param>
+            <returns></returns>
+        </member>
+        <member name="M:Absinthe.Core.SqlErrorAttackVector.RotatedProxy">
+            <summary>Extract proxy and reinsert it</summary>
+            <returns>The rotated proxy to use</returns>
+        </member>
+        <member name="M:Absinthe.Core.SqlErrorAttackVector.ToXml(System.Xml.XmlTextWriter@)">
+            <summary>
+            Serializes the state variables to XML
+            </summary>
+            <param name="xOutput">The XmlTextWriter this data should be written into</param>
+        </member>
+        <member name="M:Absinthe.Core.SqlErrorAttackVector.PopulateTableStructure(Absinthe.Core.GlobalDS.Table@)">
+            <summary>
+            Retrieves the table schema of an injected database
+            </summary>
+            <param name="TableData">The table data this should be stored into</param>
+        </member>
+        <member name="M:Absinthe.Core.SqlErrorAttackVector.GetSqlDataType(System.Int64)">
+            <summary>
+            Takes the numeric version of the data type and converts it to an internally recognizable format
+            </summary>
+            <param name="DataType">The data type as stored by the SQL server</param>
+            <returns>The .NET recognizable data type</returns>
+        </member>
+        <member name="M:Absinthe.Core.SqlErrorAttackVector.GetDatabaseUsername">
+            <summary>
+            Pull the username the database is running as
+            </summary>
+            <returns>The database username</returns>
+        </member>
+        <member name="M:Absinthe.Core.SqlErrorAttackVector.RecoverTableList(Absinthe.Core.GlobalDS.Table[])">
+            <summary>Takes a partially built schema and continues to download what is left</summary>
+            <param name="RecoveredList">The preexisting schema</param>
+            <returns>The fully downloaded schema</returns>
+        </member>
+        <member name="M:Absinthe.Core.SqlErrorAttackVector.GetTableList">
+            <summary>Retrieves the list of tables from a database</summary>
+            <returns>An array of tables</returns>
+        </member>
+        <member name="M:Absinthe.Core.SqlErrorAttackVector.PullDataFromTable(Absinthe.Core.GlobalDS.Table[],System.Int64[][],System.String)">
+            <summary>Downloads the contents of the given fields and tables from the database to an XML file.</summary>
+            <param name="SrcTable">An array of the tables to pull data from</param>
+            <param name="ColumnIDs">An array of the column lists to be pulled from the database.
+            The indices from this array should match up with the indices of the SrcTable.</param>
+            <param name="xmlFilename">The filename to write the downloaded XML data to.</param>
+        </member>
+        <member name="E:Absinthe.Core.SqlErrorAttackVector.TableChanged">
+            <summary>Event triggered when a table's data has been changed</summary>
+        </member>
+        <member name="E:Absinthe.Core.SqlErrorAttackVector.UserStatus">
+            <summary>Event triggered when a status message is to be sent to the user</summary>
+        </member>
+        <member name="P:Absinthe.Core.SqlErrorAttackVector.ExploitType">
+            <summary>
+            The type of SQL Injection exploit
+            </summary>
+        </member>
+        <member name="P:Absinthe.Core.SqlErrorAttackVector.Proxies">
+            <summary>
+            The proxies being used by this sql injection
+            </summary>
+        </member>
+        <member name="T:Absinthe.Core.UnsupportedSQLErrorVersionException">
+            <summary>An exception generated when an error plugin fails the version check</summary>
+        </member>
+        <member name="M:Absinthe.Core.UnsupportedSQLErrorVersionException.#ctor(System.String,System.String)">
+            <summary>
+            Instantiates a new UnsupportedSQLErrorVersionException
+            </summary>
+            <param name="HtmlWithVersionString">The error generated that should display the SQL Server version</param>
+            <param name="HtmlWithHavingString">The page generated by a having clause</param>
+        </member>
+        <member name="P:Absinthe.Core.UnsupportedSQLErrorVersionException.HavingErrorPageHtml">
+            <summary>
+            The page generated by a having clause
+            </summary>
+        </member>
+        <member name="P:Absinthe.Core.UnsupportedSQLErrorVersionException.VersionErrorPageHtml">
+            <summary>
+            The error generated that should display the SQL Server version
+            </summary>
+        </member>
+        <member name="T:Absinthe.Core.PluginManager">
+            <summary>
+            The class that manages all the SQL Injection plugins
+            </summary>
+        </member>
+        <member name="M:Absinthe.Core.PluginManager.#ctor">
+            <summary>
+            Instantiates a new PluginManager
+            </summary>
+        </member>
+        <member name="M:Absinthe.Core.PluginManager.GetPluginByName(System.String)">
+            <summary>
+            Retrieves the plugin by its display name
+            </summary>
+            <param name="PluginName">The display name used by the plugin</param>
+            <returns>An instance of the appropriate injection plugin</returns>
+        </member>
+        <member name="P:Absinthe.Core.PluginManager.PluginList">
+            <summary>A list of all the Plugins</summary>
+        </member>
+        <member name="T:Absinthe.Core.GlobalDS">
+            <summary>All data structures universal to the Core Library</summary>
+        </member>
+        <member name="T:Absinthe.Core.GlobalDS.FormParam">
+            <summary>The details of a parameter sent along with an HTTP request</summary>
+        </member>
+        <member name="F:Absinthe.Core.GlobalDS.FormParam.Name">
+            <summary>The name of the parameter</summary>
+        </member>
+        <member name="F:Absinthe.Core.GlobalDS.FormParam.DefaultValue">
+            <summary>The default value of the parameter</summary>
+        </member>
+        <member name="F:Absinthe.Core.GlobalDS.FormParam.Injectable">
+            <summary>Indicates if the parameter is a valid injection point</summary>
+        </member>
+        <member name="F:Absinthe.Core.GlobalDS.FormParam.AsString">
+            <summary>Indicates the parameter should be treated as a string</summary>
+        </member>
+        <member name="T:Absinthe.Core.GlobalDS.AuthType">
+            <summary>The types of http authentication available</summary>
+        </member>
+        <member name="F:Absinthe.Core.GlobalDS.AuthType.None">
+            <summary>No authentication should be used</summary>
+        </member>
+        <member name="F:Absinthe.Core.GlobalDS.AuthType.Basic">
+            <summary>Basic plain text authentication should be used</summary>
+        </member>
+        <member name="F:Absinthe.Core.GlobalDS.AuthType.Digest">
+            <summary>HTTP Digest authentication should be used</summary>
+        </member>
+        <member name="F:Absinthe.Core.GlobalDS.AuthType.NTLM">
+            <summary>NTLM authentication should be used</summary>
+        </member>
+        <member name="T:Absinthe.Core.GlobalDS.PrimaryKey">
+            <summary>A primary key structure for enumerating table data</summary>
+        </member>
+        <member name="F:Absinthe.Core.GlobalDS.PrimaryKey.Name">
+            <summary>The name of the column the primary key is located in</summary>
+        </member>
+        <member name="F:Absinthe.Core.GlobalDS.PrimaryKey.Value">
+            <summary>The textual value of the primary key</summary>
+        </member>
+        <member name="F:Absinthe.Core.GlobalDS.PrimaryKey.OutputValue">
+            <summary>The value of the primary key escaped for use in queries</summary>
+        </member>
+        <member name="T:Absinthe.Core.GlobalDS.Field">
+            <summary>A field in the database being exploited</summary>
+        </member>
+        <member name="P:Absinthe.Core.GlobalDS.Field.FieldName">
+            <summary>The human readable name of the field</summary>
+        </member>
+        <member name="P:Absinthe.Core.GlobalDS.Field.TableName">
+            <summary>The human readable name of the table the field is located in</summary>
+        </member>
+        <member name="P:Absinthe.Core.GlobalDS.Field.FullName">
+            <summary>The name of the table and field appended together</summary>
+        </member>
+        <member name="P:Absinthe.Core.GlobalDS.Field.DataType">
+            <summary>The datatype of the field</summary>
+        </member>
+        <member name="P:Absinthe.Core.GlobalDS.Field.IsPrimary">
+            <summary>Indicates if this field is a primary key for this table</summary>
+        </member>
+        <member name="T:Absinthe.Core.GlobalDS.Table">
+            <summary>A table in the database being exploited</summary>
+        </member>
+        <member name="M:Absinthe.Core.GlobalDS.Table.AddField(Absinthe.Core.GlobalDS.Field)">
+            <summary>Add a field to this table</summary>
+            <param name="Value">The field to be added to this table</param>
+        </member>
+        <member name="P:Absinthe.Core.GlobalDS.Table.Name">
+            <summary>The human readable name of the table</summary>
+        </member>
+        <member name="P:Absinthe.Core.GlobalDS.Table.FieldCount">
+            <summary>The number of fields (columns) in this table</summary>
+        </member>
+        <member name="P:Absinthe.Core.GlobalDS.Table.ObjectID">
+            <summary>The database recognizable numerical ID of this table</summary>
+        </member>
+        <member name="P:Absinthe.Core.GlobalDS.Table.FieldList">
+            <summary>The list of fields stored in this table</summary>
+        </member>
+        <member name="P:Absinthe.Core.GlobalDS.Table.RecordCount">
+            <summary>The number of data records in this table</summary>
+        </member>
+        <member name="T:Absinthe.Core.GlobalDS.ExploitType">
+            <summary>The types of exploits available</summary>
+        </member>
+        <member name="F:Absinthe.Core.GlobalDS.ExploitType.Undefined">
+            <summary>The type of exploit is undefined</summary>
+        </member>
+        <member name="F:Absinthe.Core.GlobalDS.ExploitType.BlindSQLInjection">
+            <summary>A blind sql injection</summary>
+        </member>
+        <member name="F:Absinthe.Core.GlobalDS.ExploitType.ErrorBasedTSQL">
+            <summary>An error based sql injection</summary>
+        </member>
+        <member name="T:Absinthe.Core.UnrecognizedPageException">
+            <summary>This exception is generated when a page can't be cast as true or false</summary>
+        </member>
+        <member name="M:Absinthe.Core.UnrecognizedPageException.#ctor(System.String,System.String)">
+            <summary>Instatiates a new UnrecognizedPageException</summary>
+            <param name="Message">The message to display to the user</param>
+            <param name="Page">The HTML text that caused the exception</param>
+        </member>
+        <member name="P:Absinthe.Core.UnrecognizedPageException.Message">
+            <summary>The Message associated with this page</summary>
+        </member>
+        <member name="P:Absinthe.Core.UnrecognizedPageException.Page">
+            <summary>The HTML text that generated the exception</summary>
+        </member>
+        <member name="T:Absinthe.Core.BlindSqlAttackVector">
+            <summary>The BlindSqlAttackVector class is the object used to perform attacks utilizing Blind SQL Injection</summary>
+        </member>
+        <member name="M:Absinthe.Core.BlindSqlAttackVector.#ctor(System.String,System.String,System.String,System.Collections.Specialized.NameValueCollection,System.String,Absinthe.Core.IBlindPlugin,Absinthe.Core.BlindInjectionOptions)">
+            <summary>Public constructor for instantiation.</summary>
+            <param name="URL">The URL of the target web application, including file path</param>
+            <param name="VectorName">The name of the parameter to use as the injection point</param>
+            <param name="VectorBuffer">The default value to store in the injectable parameter</param>
+            <param name="AdditionalParams">All parameters (names and values) that are used, but not chosen as injection points</param>
+            <param name="Method">The HTTP connection method. This can be "GET" or "POST"</param>
+            <param name="PluginUsed">The Plugin being used for the connection</param>
+            <param name="Options">The InjectionOptions to use for all connections</param>
+        </member>
+        <member name="M:Absinthe.Core.BlindSqlAttackVector.#ctor(System.String,System.String,System.String,System.Collections.Specialized.NameValueCollection,System.String,Absinthe.Core.IBlindPlugin,System.Double[],System.Double[],System.Int32[],System.Int32[],Absinthe.Core.BlindInjectionOptions)">
+            <summary>Public constructor for instantiation.</summary>
+            <param name="URL">The URL of the target web application, including file path</param>
+            <param name="VectorName">The name of the parameter to use as the injection point</param>
+            <param name="VectorBuffer">The default value to store in the injectable parameter</param>
+            <param name="AdditionalParams">All parameters (names and values) that are used, but not chosen as injection points</param>
+            <param name="Method">The HTTP connection method. This can be "GET" or "POST"</param>
+            <param name="PluginUsed">The Plugin being used for the connection</param>
+            <param name="TruePage">The signature for the page representing a "true" value</param>
+            <param name="FalsePage">The signature for the page representing a "false" value</param>
+            <param name="TrueFilterIn">The indices of the signature relevant for comparing an unknown to the true signature</param>
+            <param name="FalseFilterIn">The indices of the signature relevant for comparing an unknown to the false signature</param>
+            <param name="Options">The InjectionOptions to use for all requests</param>
+        </member>
+        <member name="M:Absinthe.Core.BlindSqlAttackVector.Initialize">
+            <summary>
+            Sets up the attack vector
+            </summary>
+        </member>
+        <member name="M:Absinthe.Core.BlindSqlAttackVector.ToXml(System.Xml.XmlTextWriter@)">
+            <summary>Writes the internal details of the attack vector to an XML output.</summary>
+            <param name="xOutput">An instantiated XmlTextWriter stream to output to.</param>
+        </member>
+        <member name="M:Absinthe.Core.BlindSqlAttackVector.GetDatabaseUsername">
+            <summary>Queries the remote database for the username making the connections.</summary>
+            <returns>The current database user the web application is connecting as.</returns>
+        </member>
+        <member name="M:Absinthe.Core.BlindSqlAttackVector.PopulateTableStructure(Absinthe.Core.GlobalDS.Table@)">
+            <summary>Retrieve the information about the fields for a given table from the database schema.</summary>
+            <param name="TableData">The table to load field info for.</param>
+        </member>
+        <member name="M:Absinthe.Core.BlindSqlAttackVector.RecoverTableList(Absinthe.Core.GlobalDS.Table[])">
+            <summary>Takes a partially built schema and continues to download what is left</summary>
+            <param name="RecoveredList">The preexisting schema</param>
+            <returns>The fully downloaded schema</returns>
+        </member>
+        <member name="M:Absinthe.Core.BlindSqlAttackVector.GetTableList">
+            <summary>Retrieve the information about the structure of all tables from the database schema.</summary>
+            <returns>An array containing the data for all tables in the database</returns>
+        </member>
+        <member name="M:Absinthe.Core.BlindSqlAttackVector.GetNumberOfTablesInDatabase">
+            <summary>Extracts the number of tables in the database schema</summary>
+            <returns>The number of tables in the database.</returns>
+        </member>
+        <member name="M:Absinthe.Core.BlindSqlAttackVector.GetNumberOfFieldsInTable(System.Int64)">
+            <summary>Extracts the number of fields in a table from the database schema</summary>
+            <param name="TableID">The ID of the table to check for fields</param>
+            <returns>The number of fields in the table</returns>
+        </member>
+        <member name="M:Absinthe.Core.BlindSqlAttackVector.PullDataFromTable(Absinthe.Core.GlobalDS.Table[],System.Int64[][],System.String)">
+            <summary>Downloads the contents of the given fields and tables from the database to an XML file.</summary>
+            <param name="SrcTable">An array of the tables to pull data from.</param>
+            <param name="ColumnIDLists">An array of the column lists to be pulled from the database.
+            The indices from this array should match up with the indices of SrcTable</param>
+            <param name="xmlFilename">The filename to write the downloaded XML data to</param>
+        </member>
+        <member name="E:Absinthe.Core.BlindSqlAttackVector.TableChanged">
+            <summary>Event triggered when a table's data has been changed</summary>
+        </member>
+        <member name="E:Absinthe.Core.BlindSqlAttackVector.UserStatus">
+            <summary>The event used to bubble status messages to the user</summary>
+        </member>
+        <member name="E:Absinthe.Core.BlindSqlAttackVector.UserMessage">
+            <summary>The event used to bubble messages to the user</summary>
+        </member>
+        <member name="P:Absinthe.Core.BlindSqlAttackVector.FilterOn500s">
+            <summary>Indicates if the attack vector is filtering on 500 errors instead of page recognition</summary>
+        </member>
+        <member name="P:Absinthe.Core.BlindSqlAttackVector.ExploitType">
+            <summary>The type of injection (Method and RDBMS)</summary>
+        </member>
+        <member name="P:Absinthe.Core.BlindSqlAttackVector.Proxies">
+            <summary>The active queue web proxies being used</summary>
+        </member>
+    </members>
+</doc>

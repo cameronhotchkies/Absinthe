@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.4">
+  <xs:element name="absinthedata">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="target">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="authentication">
+                <xs:complexType>
+                  <xs:attribute name="authtype" type="xs:string" use="required" />
+                  <xs:attribute name="username" type="xs:string" use="optional" />
+                  <xs:attribute name="password" type="xs:string" use="optional" />
+                  <xs:attribute name="domain" type="xs:string" use="optional" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element maxOccurs="unbounded" name="parameter">
+                <xs:complexType>
+                  <xs:attribute name="name" type="xs:string" use="required" />
+                  <xs:attribute name="value" type="xs:string" use="required" />
+                  <xs:attribute name="injectable" type="xs:string" use="required" />
+                  <xs:attribute name="string" type="xs:string" use="optional" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element maxOccurs="unbounded" name="cookie" minOccurs="0">
+                <xs:complexType>
+                  <xs:attribute name="name" type="xs:string" use="required" />
+                  <xs:attribute name="value" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="attackvector" minOccurs="0">
+                <xs:complexType>
+                  <xs:choice>
+                    <xs:sequence>
+                      <xs:element name="truepage" minOccurs="0" maxOccurs="1">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="signature-item" type="xs:decimal" />
+                          </xs:sequence>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="falsepage" minOccurs="0">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="signature-item" type="xs:decimal" />
+                          </xs:sequence>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="truefilter" minOccurs="0">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="filter-item" type="xs:unsignedShort" />
+                          </xs:sequence>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="falsefilter" minOccurs="0">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="filter-item" type="xs:unsignedShort" />
+                          </xs:sequence>
+                        </xs:complexType>
+                      </xs:element>
+                    </xs:sequence>
+                    <xs:sequence>
+                      <xs:element maxOccurs="unbounded" name="entry">
+                        <xs:complexType>
+                          <xs:attribute name="field" type="xs:string" use="required" />
+                          <xs:attribute name="table" type="xs:string" use="optional" />
+                          <xs:attribute name="datatype" type="xs:string" use="required" />
+                          <xs:attribute name="seq" type="xs:integer" use="required" />
+                        </xs:complexType>
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:choice>
+                  <xs:attribute name="name" type="xs:string" use="required" />
+                  <xs:attribute name="buffer" type="xs:string" use="required" />
+                  <xs:attribute name="type" type="xs:string" use="required" />
+                  <xs:attribute name="injectasstring" type="xs:boolean" use="optional" />
+                  <xs:attribute name="postbuffer" type="xs:string" use="optional" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="address" type="xs:string" use="required" />
+            <xs:attribute name="ssl" type="xs:boolean" use="required" />
+            <xs:attribute name="terminatequery" type="xs:boolean" use="required" />
+            <xs:attribute name="throttle" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="delimiter" type="xs:string" use="optional" />
+            <xs:attribute name="tolerance" type="xs:decimal" use="optional" />
+            <xs:attribute name="blind" type="xs:string" use="required" />
+            <xs:attribute name="plugin" type="xs:string" use="required" />
+            <xs:attribute name="method" type="xs:string" />
+            <xs:attribute name="useragent" type="xs:string" use="optional" />
+            <xs:attribute name="appendedtext" type="xs:string" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="databaseschema">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="table" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="field" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:long" />
+                        <xs:attribute name="name" type="xs:string" />
+                        <xs:attribute name="datatype" type="xs:string" />
+                        <xs:attribute name="primary" type="xs:boolean" use="optional" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="id" type="xs:long" use="required" />
+                  <xs:attribute name="name" type="xs:string" use="required" />
+                  <xs:attribute name="recordcount" type="xs:long" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="tablesfinished" type="xs:boolean" use="optional" />
+            <xs:attribute name="username" type="xs:string" use="optional" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:decimal" use="required" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

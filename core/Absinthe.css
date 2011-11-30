@@ -1,0 +1,26 @@
+body { font-family: tahoma, arial; }
+
+li { 
+	border-style: dotted;
+	border-width: 2px;       
+	border-color: darkgreen;
+	padding: 4px;
+	}
+	
+.row0 { background-color: lightgrey; }
+.row1 { background-color: lightgreen; }
+.databasetables { border-width: 2px;
+				  border-color: darkgreen;
+				  background-color: darkgreen;
+				  padding: 4px;
+				  border-style: groove;
+				}
+.databaserows { border-width: 2px;
+				  border-color: darkgreen;
+				  background-color: white;
+				  padding: 4px;
+				  border-style: groove;
+				}
+.copyright { float: center; 
+			font-size: 10px;
+				}

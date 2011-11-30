@@ -1,0 +1,76 @@
+        .,::      .: .,,.                 ...    :::::::..    .,-:::::;  
+  ,;;,  `;;;,  .,;;,;;'`';,  ,;;,      .;;;;;;;. ;;;;``;;;; ,;;-'````'   
+,['  [n   '[[,,[[' [[, _,[[,['  [n    ,[[     \[[,[[[,/[[[' [[[   [[[[[[[|
+$$    $$   Y$$$P    Y$$P"$$$$    $$   $$$,     $$$$$$$$$c   "$$c.    "$$ 
+Y8,  ,8" oP"``"Yo,  ,,_,d8"Y8,  ,8"   "888,_ _,88P888b "88bo,`Y8bo,,,o88o
+ "YmmP,m"       "Mm, "MP"   "YmmP  (O)  "YMMMMMP" MMMM   "W/   `'YMUP"YMM
+
+=========================================================================
+-------------------------------------------------------------------------
+
+ 		     Absinthe - Automated SQL Injection
+	
+ 		     	  by nummish <nummish AT 0x90.org>
+
+-------------------------------------------------------------------------
+=========================================================================
+
+Absinthe 1.4 (Two trick pony...)
+
+This is the biggest release of Absinthe since I GPL'd the code.
+Absinthe is no longer just a Blind injection tool, this release has 
+the basics of MS SQL Server error based injection. This runs a *LOT* 
+faster than the blind stuff, so if it's an option, use it. Otherwise, 
+the Blind for Oracle, SQL Server and PostGres are still there. They
+will update the progress earlier, so use of the tool will be less painful.
+
+If you have any questions or comments on the tool, please do not hesitate
+to visit http://www.0x90.org/releases/absinthe or email us at: 
+absinthe@0x90.org
+
+An HTML user guide is available at:
+http://www.0x90.org/releases/absinthe/docs
+
+I've included a compiled version for straight install which includes
+the current wx.NET DLLs required for Absinthe. 
+
+With version 1.4, I've switched to using nant (nant.sf.net) as the build
+tool. You will need to install this to build the binaries.
+ 
+From this point, you can just run the install script as normal. 
+
+Hopefully you find this useful.
+- nummish
+
+v1.4  Big Ups:
+--------------
+Thanks & props to the following for their help & feedback for this version:
+Caezar, Dyngnosis, Tom.Pester, Andre Ludwig, morning_wood of exploitlabs.com
+and Damon Cortesi
+
+Changes Since 1.3.1
+-------------------
+
+	- Fixed a bug that caused cookie names to be forced to lowercase
+	- Added code to allow better handling of HTTP 500 Errors
+	- Large rewrite of all the plugin code
+	- Added support for Error based injections
+	- Partial table downloads, and download recovery
+	- Generated an XSD and XSLT for the saved file format
+	- Custom User Agent strings
+	- Cleanup of UI code
+	- Lots of very minor bug fixes
+	- Replaced Makefiles with nAnt build files	
+
+Changes Since 1.3.0
+-------------------
+
+	- Target URL will change to "https://" for SSL connections
+	- Bug causing POST requests to fail when using a proxy fixed
+	- Several changes to all the plugins to fix SQL syntax errors
+	- Now allows for unicode text to be downloaded
+	- Tables are now part of the downloaded data
+	- SSL authorization problems on Mono fixed
+	- Minor UI updates
+	- Error with delimiter when client environment is different than
+	  than target environment fixed

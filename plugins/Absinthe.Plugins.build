@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<project name="Absinthe.Plugins" default="build" basedir=".">
+	<description>The 0x90.org SQL Injection Tool Plugins</description>
+	
+	<property name="debug" value="true" overwrite="false" />
+	<property name="warning" value="4" overwrite="false" />
+
+	<target name="clean" description="remove the binaries">
+		<delete file="Absinthe.Plugins.dll" failonerror="false" />
+	</target>
+
+	<target name="build" description="compiles the source code">
+		<csc target="library" output="Absinthe.Plugins.dll" debug="${debug}" warninglevel="${warning}">
+			<references>
+				<include name="../core/Absinthe.Core.dll" />
+				<include name="System.Data.dll" />
+			</references>
+
+			<sources>
+				<include name="BlindMSSQL.cs" />
+				<include name="BlindORASQL.cs" />
+				<include name="BlindPGSQL.cs" />
+				<include name="BlindMySQL.cs" />
+				<include name="BlindSybaseSQL.cs" />
+				<include name="SqlErrorTestPlugin.cs" />
+				<include name="Sql65ErrorPlugin.cs" />
+				<include name="Sql7ErrorPlugin.cs" />
+				<include name="Sql2kErrorPlugin.cs" />
+				<include name="Sql2kErrorPlugin_B.cs" />
+			</sources>
+		</csc>
+	</target>
+
+</project>

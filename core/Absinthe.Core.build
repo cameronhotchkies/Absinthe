@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<project name="Absinthe.Core" default="build" basedir=".">
+	<description>The 0x90.org SQL Injection Tool Core Libraries</description>
+
+	<property name="debug" value="true" overwrite="false" />
+	<property name="warning" value="4" overwrite="false" />
+
+	<target name="clean" description="remove the binaries">
+		<delete file="Absinthe.Core.dll" failonerror="false" />
+	</target>
+
+	<target name="build" description="compiles the source code">
+		<csc target="library" output="Absinthe.Core.dll" debug="${debug}" warninglevel="${warning}">
+			<references>
+				<include name="System.Web.dll" />
+				<include name="System.Data.dll" />
+			</references>
+
+			<resources>
+				<include name="Absinthe.xsd" />
+				<include name="To1_4.xslt" />
+			</resources>
+		
+			<sources>
+				<include name="AssemblyInfo.cs"/>
+				<include name="BlindSqlAttackVector.cs"/>
+				<include name="GlobalDS.cs"/>
+				<include name="PluginManager.cs"/>
+				<include name="SqlErrorAttackVector.cs"/>
+				<include name="httpConnect.cs"/>
+				<include name="AttackVector.cs"/>
+				<include name="AttackVectorFactory.cs"/>
+				<include name="DataStore.cs"/>
+				<include name="ParsePage.cs"/>
+				<include name="PluginTemplate.cs"/>
+				<include name="InjectionOptions.cs" />
+				<include name="BlindInjectionOptions.cs" />
+				<include name="ErrorInjectionOptions.cs" />
+			</sources>
+		</csc>
+	</target>
+</project>
