@@ -1,0 +1,14 @@
+syntax: glob
+_ReSharper.Absinthe/
+Dotfuscated/
+_UpgradeReport_Files/
+UpgradeLog.XML
+*.csproj.user
+core/bin/Debug/
+gui/bin/Debug/
+gui/obj/Debug/
+plugins/bin/Debug/l
+plugins/bin/Debug/Absinthe.Core.dll
+core/obj/Debug/
+plugins/bin/Debug/
+plugins/obj/Debug/

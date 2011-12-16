@@ -1,11 +1,6 @@
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Absinthe.Core", "core\Absinthe.Core.csproj", "{567FF880-492C-4D17-9A1C-70EE11649FE6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Absinthe", "wx\Absinthe.csproj", "{795561CB-2403-498A-B546-5E03D15FDF92}"
-	ProjectSection(ProjectDependencies) = postProject
-		{567FF880-492C-4D17-9A1C-70EE11649FE6} = {567FF880-492C-4D17-9A1C-70EE11649FE6}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Absinthe.Plugins", "plugins\Absinthe.Plugins.csproj", "{D6B143C8-D2CA-4C7B-A285-ACAC9266BEC5}"
 EndProject
@@ -25,9 +20,6 @@ Global
 		{567FF880-492C-4D17-9A1C-70EE11649FE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{567FF880-492C-4D17-9A1C-70EE11649FE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{567FF880-492C-4D17-9A1C-70EE11649FE6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{795561CB-2403-498A-B546-5E03D15FDF92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{795561CB-2403-498A-B546-5E03D15FDF92}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{795561CB-2403-498A-B546-5E03D15FDF92}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D6B143C8-D2CA-4C7B-A285-ACAC9266BEC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D6B143C8-D2CA-4C7B-A285-ACAC9266BEC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6B143C8-D2CA-4C7B-A285-ACAC9266BEC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
