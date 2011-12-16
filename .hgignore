@@ -12,3 +12,4 @@ plugins/bin/Debug/Absinthe.Core.dll
 core/obj/Debug/
 plugins/bin/Debug/
 plugins/obj/Debug/
+*.suo
